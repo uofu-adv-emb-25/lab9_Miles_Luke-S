@@ -4,19 +4,19 @@
 3. Trains on each track only run in one direction
 4. There will be no mechanical or electrical failures
 5. Trains will never reach the crossing before the gate has lowered
-6. The gates will always be lowered when a train is in the crossing
+6. The gates are only lowered when a train is in the crossing
 7. The alarm will always be on when a train is present
-8. A timer emits an event elasped 10 seconds after the alarm starts ringing
+8. A timer emits an event elasped 10 seconds after the alarm starts ringing and the last train departs
 
 ## Varying Invariants
 #### Does there exist a sequence of events, such that an invariant is no longer true?
-In a real world situation, there are numerous sequences of events that cause our established invariants to no longer be true. For example, a speeding train could be going fast enough to reach the gate before it has completely lowered. 
+In a real world situation, there are numerous sequences of events that cause our established invariants to no longer be true. For example, a speeding train could be going fast enough to reach the gate before it has completely lowered.
 
 #### Counter-Example Sequence
 If both a southbound and northbound train approach, the alarm starts, the gate lowers, and then only the southbound train departs, the northbound train may still be on the tracks. This makes invariant 6 false.
 
 ## Checking FSMs
-In Miles's FSM, once the system has entered the Alarm Startup state, if a train approaches the same instant that the elapsed signal occurs, there are multiple conditions met simultaneously. This could cause an error in logic and a disruption to the system's state. 
+In Miles's FSM, once the system has entered the Alarm Startup state, if a train approaches the same instant that the elapsed signal occurs, there are multiple conditions met simultaneously. This could cause an error in logic and a disruption to the system's state.
 One fix to this could be adding more state transitions from Alarm Startup to Barrier Lowered that account for both the elapsed and train arrival signals. Alternatively, we could state assumptions for how the system would behave in this case. We could, for example, define a priority determining which transition take precedence over others.
 
 ## Proving the Model Correct
@@ -35,9 +35,9 @@ One fix to this could be adding more state transitions from Alarm Startup to Bar
 | 10     | 1         | 0        | 1                  | 0                  |                |                |              |              |              | 22            |
 | 11     | 1         | 0        | 1                  | 1                  |                |                |              |              |              | 22            |
 | 12     | 1         | 1        | 0                  | 0                  |                |                |              |              |              | 21            |
-| 13     | 1         | 1        | 0                  | 1                  | 15             |                |              |              |              |               |
-| 14     | 1         | 1        | 1                  | 0                  |                |                |              |              |              |               |
-| 15     | 1         | 1        | 1                  | 1                  |                |                |              |              |              |               |
+| 13     | 1         | 1        | 0                  | 1                  | 15             | 16             | 16           | 4            | 23           | 16, 23        |
+| 14     | 1         | 1        | 1                  | 0                  | 16             | 15             | 4            | 16           | 23           | 16, 23        |
+| 15     | 1         | 1        | 1                  | 1                  | 16             | 16             | 13           | 14           | 23           | 23            |
 
 | number | invariant |
 |--------|-----------|
@@ -48,4 +48,4 @@ One fix to this could be adding more state transitions from Alarm Startup to Bar
 | 20     | Trains will never reach the crossing before the gate has lowered |
 | 21     | The gates are only lowered when a train is in the crossing |
 | 22     | The alarm will always be on when a train is present |
-| 23     | A timer emits an event elasped 10 seconds after the alarm starts ringing|
+| 23     | A timer emits an event elasped 10 seconds after the alarm starts ringing and the last train departs |
