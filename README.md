@@ -52,7 +52,6 @@ One fix to this could be adding more state transitions from Alarm Startup to Bar
 
 
 ## New FSM Based on our Table
-![alt text][FSM]
-[FSM]: https://github.com/uofu-adv-emb-25/lab9_Miles_Luke-S/blob/lab9/fsm.png "New FSM"
+![New FSM](./fsm.png)
 
-FSM code is in fsm.dot
+FSM code is in `fsm.dot`
