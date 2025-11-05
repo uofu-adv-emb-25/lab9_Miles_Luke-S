@@ -49,3 +49,10 @@ One fix to this could be adding more state transitions from Alarm Startup to Bar
 | 21     | The gates are only lowered when a train is in the crossing |
 | 22     | The alarm will always be on when a train is present |
 | 23     | A timer emits an event elasped 10 seconds after the alarm starts ringing and the last train departs |
+
+
+## New FSM Based on our Table
+![alt text][FSM]
+[FSM]: https://github.com/uofu-adv-emb-25/lab9_Miles_Luke-S/blob/lab9/fsm.png "New FSM"
+
+FSM code is in fsm.dot
