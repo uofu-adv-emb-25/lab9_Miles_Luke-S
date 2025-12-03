@@ -1,0 +1,34 @@
+digraph {
+
+    0 [label="0: arms_up, alarm_off, northbound_absent, southbound_absent"];
+    0 -> 6 [label="north_approach"];
+    0 -> 5 [label="south_approach"];
+
+    4 [label="4: arms_up, alarm_on, northbound_absent, southbound_absent"];
+    4 -> 6 [label="north_approach"];
+    4 -> 5 [label="south_approach"];
+    4 -> 0 [label="time_elapsed"];
+
+    5 [label="5: arms_up, alarm_on, northbound_absent, southbound_present"];
+    5 -> 7 [label="north_approach"];
+    5 -> 13 [label="time_elapsed"];
+
+    6 [label="6: arms_up, alarm_on, northbound_present, southbound_absent"];
+    6 -> 7 [label="south_approach"];
+    6 -> 14 [label="time_elapsed"];
+
+    7 [label="7: arms_up, alarm_on, northbound_present, southbound_apresent"];
+    7 -> 15 [label="time_elapsed"];
+
+    13 [label="13: arms_down, alarm_on, northbound_absent, southbound_present"];
+    13 -> 15 [label="north_approach"];
+    13 -> 4 [label="south_depart"];
+
+    14 [label="14: arms_down, alarm_on, northbound_present, southbound_absent"];
+    14 -> 15 [label="south_approach"];
+    14 -> 4 [label="north_depart"];
+
+    15 [label="15: arms_down, alarm_on, northbound_present, southbound_present"];
+    15 -> 13 [label="north_depart"];
+    15 -> 14 [label="south_depart"];
+}
